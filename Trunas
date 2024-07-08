@@ -1,0 +1,72 @@
+# Installing TrueNAS on Proxmox
+
+This guide provides step-by-step instructions to install TrueNAS on a Proxmox server.
+
+## Prerequisites
+
+- Proxmox VE installed and running
+- TrueNAS ISO file downloaded
+
+## Steps
+
+### 1. Download the TrueNAS ISO
+
+Download the TrueNAS ISO from the [official TrueNAS website](https://www.truenas.com/download-truenas-core/).
+
+### 2. Upload the ISO to Proxmox
+
+1. Log in to your Proxmox web interface.
+2. Navigate to `Datacenter` -> `your server` -> `local` (or another storage where you want to upload the ISO).
+3. Click on `ISO Images` and then `Upload`.
+4. Select the downloaded TrueNAS ISO file and upload it.
+
+### 3. Create a New Virtual Machine
+
+1. In the Proxmox web interface, click on `Create VM`.
+2. Configure the VM as follows:
+   - **General**:
+     - Node: Select your Proxmox server
+     - VM ID: (Automatically generated)
+     - Name: TrueNAS
+   - **OS**:
+     - Use CD/DVD: Select the TrueNAS ISO you uploaded
+     - Guest OS Type: Other
+   - **System**:
+     - BIOS: Default (SeaBIOS)
+     - Machine: Default (i440fx)
+   - **Hard Disk**:
+     - Storage: Choose your storage
+     - Disk size: Minimum 8GB (adjust as needed)
+   - **CPU**:
+     - Sockets: 1
+     - Cores: 2 (adjust as needed)
+   - **Memory**:
+     - Minimum 8GB (adjust as needed)
+   - **Network**:
+     - Bridge: vmbr0
+
+3. Click `Finish` to create the VM.
+
+### 4. Start the VM and Install TrueNAS
+
+1. Select the TrueNAS VM and click `Start`.
+2. Open the Console and follow the installation steps in the TrueNAS installer.
+
+### 5. Post-Installation Configuration
+
+1. Once the installation is complete, reboot the VM.
+2. Log in to the TrueNAS web interface using the IP address assigned to the VM.
+3. Follow the TrueNAS setup wizard to configure your storage and settings.
+
+## Additional Resources
+
+- [TrueNAS Documentation](https://www.truenas.com/docs/)
+- [Proxmox Documentation](https://pve.proxmox.com/wiki/Main_Page)
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request with any improvements.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
