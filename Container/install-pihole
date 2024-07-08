@@ -1,0 +1,6 @@
+#We need Curl to download PiHole
+#To install Curl
+apt install curl -y 
+
+#To Install PiHole
+curl -sSL https://install.pi-hole.net | bash
