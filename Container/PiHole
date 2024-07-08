@@ -1,0 +1,44 @@
+# Installing Pi-hole in an LXC Container on Proxmox
+
+This guide provides step-by-step instructions to install Pi-hole in an LXC container on a Proxmox server.
+
+## Prerequisites
+
+- Proxmox VE installed and running
+- Basic understanding of Proxmox and networking
+
+## Steps
+
+### 1. Create an LXC Container
+
+1. Log in to your Proxmox web interface.
+2. Navigate to `Datacenter` -> `your server` -> `Create CT`.
+3. Configure the container as follows:
+   - **General**:
+     - Hostname: pihole
+     - Password: Set a strong password
+   - **Template**:
+     - Storage: Choose your storage
+     - Template: Select a Debian template (Debian 11 recommended)
+   - **Root Disk**:
+     - Storage: Choose your storage
+     - Disk size: Minimum 4GB (adjust as needed)
+   - **CPU**:
+     - Cores: 1 (adjust as needed)
+   - **Memory**:
+     - RAM: Minimum 512MB (adjust as needed)
+   - **Network**:
+     - Bridge: vmbr0
+     - IPv4: DHCP (or set a static IP if preferred)
+4. Click `Finish` to create the container.
+
+### 2. Start the LXC Container
+
+1. Select the pihole container and click `Start`.
+2. Open the Console.
+
+### 3. Update the Container
+
+1. Update the package list and upgrade all installed packages:
+   ```bash
+   apt update && apt upgrade -y
