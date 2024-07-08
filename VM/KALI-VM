@@ -1,0 +1,62 @@
+# Installing Kali Linux on Proxmox
+
+This guide provides step-by-step instructions to install Kali Linux on a Proxmox server.
+
+## Prerequisites
+
+- Proxmox VE installed and running
+- Kali Linux ISO file downloaded
+
+## Steps
+
+### 1. Download the Kali Linux ISO
+
+Download the Kali Linux ISO from the [official Kali Linux website](https://www.kali.org/downloads/).
+
+### 2. Upload the ISO to Proxmox
+
+1. Log in to your Proxmox web interface.
+2. Navigate to `Datacenter` -> `your server` -> `local` (or another storage where you want to upload the ISO).
+3. Click on `ISO Images` and then `Upload`.
+4. Select the downloaded Kali Linux ISO file and upload it.
+
+### 3. Create a New Virtual Machine
+
+1. In the Proxmox web interface, click on `Create VM`.
+2. Configure the VM as follows:
+   - **General**:
+     - Node: Select your Proxmox server
+     - VM ID: (Automatically generated)
+     - Name: KaliLinux
+   - **OS**:
+     - Use CD/DVD: Select the Kali Linux ISO you uploaded
+     - Guest OS Type: Linux
+     - Version: 5.x - 2.6 Kernel
+   - **System**:
+     - BIOS: Default (SeaBIOS)
+     - Machine: Default (i440fx)
+   - **Hard Disk**:
+     - Storage: Choose your storage
+     - Disk size: Minimum 20GB (adjust as needed)
+   - **CPU**:
+     - Sockets: 1
+     - Cores: 2 (adjust as needed)
+   - **Memory**:
+     - Minimum 2GB (adjust as needed)
+   - **Network**:
+     - Bridge: vmbr0
+
+3. Click `Finish` to create the VM.
+
+### 4. Start the VM and Install Kali Linux
+
+1. Select the KaliLinux VM and click `Start`.
+2. Open the Console and follow the installation steps in the Kali Linux installer.
+
+### 5. Post-Installation Configuration
+
+1. Once the installation is complete, reboot the VM.
+2. Log in to the Kali Linux desktop environment.
+3. Update the package list and upgrade all installed packages by running:
+   ```bash
+   sudo apt update && sudo apt upgrade -y
